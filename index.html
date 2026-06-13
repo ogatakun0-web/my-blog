@@ -1,4 +1,47 @@
 <!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Blog</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #f0f2f5; color: #333; }
+    header { background: #1a1a2e; color: white; padding: 24px 40px; }
+    header h1 { font-size: 30px; }
+    header p { font-size: 14px; color: #aaa; margin-top: 6px; }
+    .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+    .card { background: white; border-radius: 14px; padding: 30px; margin-bottom: 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+    .meta { font-size: 13px; color: #999; margin-bottom: 10px; }
+    .card h2 { font-size: 22px; margin-bottom: 12px; color: #1a1a2e; }
+    .card p { font-size: 15px; line-height: 1.8; color: #555; margin-bottom: 18px; }
+    .tweet-btn { display: inline-flex; align-items: center; gap: 8px; background: #000; color: white; border-radius: 20px; padding: 10px 22px; font-size: 14px; font-weight: bold; text-decoration: none; }
+    .tweet-btn:hover { background: #333; }
+    footer { text-align: center; padding: 30px; color: #aaa; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>My Blog</h1>
+    <p>記事を書いて、X でシェアしよう</p>
+  </header>
+  <div class="container">
+    <div class="card">
+      <p class="meta">2026年6月13日</p>
+      <h2>Git をインストールしてみた</h2>
+      <p>今日は Git を Windows にインストールしました。Git Bash を使うことでコマンドラインからGitを操作できるようになりました。GitHubと連携すればバージョン管理も簡単にできそうです。</p>
+      <a class="tweet-btn" href="https://twitter.com/intent/tweet?text=Git+をインストールしてみた&url=https://ogatakun0-web.github.io/my-blog/" target="_blank" rel="noopener">X でシェア</a>
+    </div>
+    <div class="card">
+      <p class="meta">2026年6月13日</p>
+      <h2>GitHub でページを公開してみた</h2>
+      <p>GitHub Pagesを使って静的サイトを公開しました。HTMLファイルをリポジトリに置くだけでWebサイトとして公開できるので、とても手軽です。ブログとして活用していきたいと思います。</p>
+      <a class="tweet-btn" href="https://twitter.com/intent/tweet?text=GitHub+でページを公開してみた&url=https://ogatakun0-web.github.io/my-blog/" target="_blank" rel="noopener">X でシェア</a>
+    </div>
+  </div>
+  <footer><p>2026 My Blog - Powered by GitHub Pages</p></footer>
+</body>
+</html><!DOCTYPE html>
   <html lang="ja">
   <head>
     <meta charset="UTF-8">
