@@ -66,14 +66,7 @@ textarea:focus{border-color:#1d9bf0}
 <div class="chip" data-g="tone">😂 ユーモア</div>
 </div>
 <div class="sec">修行・挑戦日数（任意）</div>
-<div class="chips">
-<div class="chip" data-g="days">1日目</div>
-<div class="chip" data-g="days">3日目</div>
-<div class="chip" data-g="days">7日目</div><div class="chip" data-g="days">8日目</div>
-<div class="chip" data-g="days">14日目</div>
-<div class="chip" data-g="days">30日目</div>
-<div class="chip" data-g="days">100日目</div>
-</div>
+<input type="number" id="days-input" min="1" max="9999" placeholder="例：8" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid #333;background:#1a1a1a;color:#e8e8e8;font-size:14px;margin-top:6px;outline:none;box-sizing:border-box;" oninput="this.style.borderColor=this.value?'#1d9bf0':'#333'">
 <button class="btn" onclick="gen('short')">🐻 3パターン生成</button>
 <div class="out" id="o-short"></div>
 </div>
@@ -117,7 +110,7 @@ function sw(t){document.querySelectorAll('.tab').forEach((b,i)=>b.classList.togg
 document.querySelectorAll('.chip').forEach(c=>{c.addEventListener('click',function(){const g=this.dataset.g,radio=['time','fmt','tgt'].includes(g);if(radio)document.querySelectorAll('.chip[data-g="'+g+'"]').forEach(x=>x.classList.remove('on'));this.classList.toggle('on');});});
 function gs(g){return[...document.querySelectorAll('.chip[data-g="'+g+'"].on')].map(c=>c.textContent.trim())}
 function st(type){const m={outreach:'アウトリーチDM：プロフィール（例：副業月5万達成のWebライター）を入力。初回DM文面3パターンを生成します。',reply:'リプ文面：リプしたい相手のツイート内容とあなたのポジションを入力してください。',profile:'プロフ改善：現在のプロフ文を貼り付けてください。フォローされやすいプロフに改善します。',hook:'フック強化：改善したいツイートの冒頭または本文を入力してください。冒頭1行を強力なフックに書き換えます。'};document.getElementById('c-theme').value=m[type];}
-function gl(tab){const theme=document.getElementById(tab==='short'?'s-theme':tab==='article'?'a-theme':'c-theme').value;const time=gs('time')[0]||'朝',tone=gs('tone')[0]||'熱血',days=gs('days').join(''),fmt=gs('fmt')[0]||'リスト型',tgt=gs('tgt')[0]||'副業志望';const t=theme||'今日の気づき';if(tab==='short'){const d=days?days+'の':'';return[(time.includes('朝')?'おはようございます☀️
+function gl(tab){const theme=document.getElementById(tab==='short'?'s-theme':tab==='article'?'a-theme':'c-theme').value;const time=gs('time')[0]||'朝',tone=gs('tone')[0]||'熱血',days=document.getElementById('days-input').value,fmt=gs('fmt')[0]||'リスト型',tgt=gs('tgt')[0]||'副業志望';const t=theme||'今日の気づき';if(tab==='short'){const d=days?days+'の':'';return[(time.includes('朝')?'おはようございます☀️
 
 ':'')+d+t+'
 
