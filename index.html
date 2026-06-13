@@ -113,31 +113,11 @@ textarea:focus{border-color:#1d9bf0}
 <div class="out" id="o-custom"></div>
 </div>
 <script>
-function sw(t){
-  document.querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('on',['short','article','custom'][i]===t));
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
-  document.getElementById('p-'+t).classList.add('on');
-}
-document.querySelectorAll('.chip').forEach(c=>{
-  c.addEventListener('click',function(){
-    const g=this.dataset.g,radio=['time','fmt','tgt'].includes(g);
-    if(radio)document.querySelectorAll('.chip[data-g="'+g+'"]').forEach(x=>x.classList.remove('on'));
-    this.classList.toggle('on');
-  });
-});
+function sw(t){document.querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('on',['short','article','custom'][i]===t));document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));document.getElementById('p-'+t).classList.add('on');}
+document.querySelectorAll('.chip').forEach(c=>{c.addEventListener('click',function(){const g=this.dataset.g,radio=['time','fmt','tgt'].includes(g);if(radio)document.querySelectorAll('.chip[data-g="'+g+'"]').forEach(x=>x.classList.remove('on'));this.classList.toggle('on');});});
 function gs(g){return[...document.querySelectorAll('.chip[data-g="'+g+'"].on')].map(c=>c.textContent.trim())}
-function st(type){
-  const m={outreach:'アウトリーチDM：プロフィール（例：副業月5万達成のWebライター）を入力。初回DM文面3パターンを生成します。',reply:'リプ文面：リプしたい相手のツイート内容とあなたのポジションを入力してください。',profile:'プロフ改善：現在のプロフ文を貼り付けてください。フォローされやすいプロフに改善します。',hook:'フック強化：改善したいツイートの冒頭または本文を入力してください。冒頭1行を強力なフックに書き換えます。'};
-  document.getElementById('c-theme').value=m[type];
-}
-function gl(tab){
-  const theme=document.getElementById(tab==='short'?'s-theme':tab==='article'?'a-theme':'c-theme').value;
-  const time=gs('time')[0]||'朝',tone=gs('tone')[0]||'熱血',days=gs('days').join(''),fmt=gs('fmt')[0]||'リスト型',tgt=gs('tgt')[0]||'副業志望';
-  const t=theme||'今日の気づき';
-  if(tab==='short'){
-    const d=days?days+'の':'';
-    return[
-      (time.includes('朝')?'おはようございます☀️
+function st(type){const m={outreach:'アウトリーチDM：プロフィール（例：副業月5万達成のWebライター）を入力。初回DM文面3パターンを生成します。',reply:'リプ文面：リプしたい相手のツイート内容とあなたのポジションを入力してください。',profile:'プロフ改善：現在のプロフ文を貼り付けてください。フォローされやすいプロフに改善します。',hook:'フック強化：改善したいツイートの冒頭または本文を入力してください。冒頭1行を強力なフックに書き換えます。'};document.getElementById('c-theme').value=m[type];}
+function gl(tab){const theme=document.getElementById(tab==='short'?'s-theme':tab==='article'?'a-theme':'c-theme').value;const time=gs('time')[0]||'朝',tone=gs('tone')[0]||'熱血',days=gs('days').join(''),fmt=gs('fmt')[0]||'リスト型',tgt=gs('tgt')[0]||'副業志望';const t=theme||'今日の気づき';if(tab==='short'){const d=days?days+'の':'';return[(time.includes('朝')?'おはようございます☀️
 
 ':'')+d+t+'
 
@@ -146,8 +126,7 @@ function gl(tab){
 
 今日から変える。見てろよ。
 
-#コワーク #修行中',
-      t+'
+#コワーク #修行中',t+'
 
 気づいたこと↓
 
@@ -157,8 +136,7 @@ function gl(tab){
 
 '+d+'今日も一歩。
 
-#副業 #自己投資',
-      (time.includes('朝')?'【朝の宣言】':'【今日の学び】')+'
+#副業 #自己投資',(time.includes('朝')?'【朝の宣言】':'【今日の学び】')+'
 
 '+t+'
 
@@ -167,13 +145,7 @@ function gl(tab){
 
 積み上げた人が最終的に勝つ。
 
-#'+(days||'挑戦中')
-    ];
-  }
-  if(tab==='article'){
-    if(fmt.includes('リスト')){
-      return[
-        '【'+t+'】
+#'+(days||'挑戦中')];}if(tab==='article'){if(fmt.includes('リスト')){return['【'+t+'】
 
 知らないと損する3つのこと↓
 
@@ -182,8 +154,7 @@ function gl(tab){
 3. 仲間を作ると加速する
 
 '+tgt+'の人は必見。
-保存して後で見返してください✅',
-        t+'で結果が出た人の共通点↓
+保存して後で見返してください✅',t+'で結果が出た人の共通点↓
 
 ✅ 毎日アウトプットしてる
 ✅ 失敗を記録して活かしてる
@@ -191,8 +162,7 @@ function gl(tab){
 
 この3つだけ意識すれば変わる。
 
-いいねで記録しておいてください👍',
-        '正直に言う。
+いいねで記録しておいてください👍','正直に言う。
 '+t+'で失敗する人の特徴↓
 
 ❌ インプットだけで満足
@@ -201,11 +171,7 @@ function gl(tab){
 
 逆をやるだけで変わる。
 '+tgt+'の人へ届け。
-RTで広めてもらえると嬉しいです🙏'
-      ];
-    }
-    return[
-      '【'+t+'の話】
+RTで広めてもらえると嬉しいです🙏'];}return['【'+t+'の話】
 
 半年前の自分は全く稼げなかった。
 
@@ -215,8 +181,7 @@ RTで広めてもらえると嬉しいです🙏'
 
 '+tgt+'の人、この違いを理解するだけで結果が変わる。
 
-保存推奨✅',
-      t+'
+保存推奨✅',t+'
 
 ある日気づいた。「努力の方向が違った」と。
 
@@ -226,8 +191,7 @@ RTで広めてもらえると嬉しいです🙏'
 '+tgt+'の人へ。
 今すぐ立ち止まって考えてみて。
 
-いいねしてくれると励みになります👍',
-      t+'について正直に話す。
+いいねしてくれると励みになります👍',t+'について正直に話す。
 
 最初は全然うまくいかなかった。
 でも諦めなかった理由がある。
@@ -237,20 +201,14 @@ RTで広めてもらえると嬉しいです🙏'
 '+tgt+'の人、焦らなくていい。
 一歩ずつで絶対たどり着ける。
 
-RTで仲間に届けてください🙏'
-    ];
-  }
-  const ct=theme||'コンテンツ';
-  return[
-    '【パターン1 シンプル直球型】
+RTで仲間に届けてください🙏'];}const ct=theme||'コンテンツ';return['【パターン1 シンプル直球型】
 
 '+ct.substring(0,40)+'
 
 率直に言います。
 これを知ってるかどうかで差がつきます。
 
-詳しくはコメントで👇',
-    '【パターン2 共感型】
+詳しくはコメントで👇','【パターン2 共感型】
 
 '+ct.substring(0,40)+'
 
@@ -258,8 +216,7 @@ RTで仲間に届けてください🙏'
 
 一人で抱え込まないで。
 
-いいねで応援してください👍',
-    '【パターン3 実績・証拠型】
+いいねで応援してください👍','【パターン3 実績・証拠型】
 
 '+ct.substring(0,40)+'
 
@@ -267,107 +224,9 @@ RTで仲間に届けてください🙏'
 
 → 継続することで必ず変わる
 
-保存して後で見返してね✅'
-  ];
-}
-async function gen(tab){
-  const out=document.getElementById('o-'+tab);
-  out.style.display='block';
-  out.innerHTML='<div style="text-align:center;padding:20px;color:#555">生成中...</div>';
-  await new Promise(r=>setTimeout(r,800));
-  const results=gl(tab);
-  out.innerHTML=results.map((tx,i)=>'<div class="card"><div class="plabel">パターン'+(i+1)+'</div><button class="cp" onclick="cp(this,this.nextElementSibling.nextElementSibling.textContent)">コピー</button><div class="txt">'+tx+'</div><div class="cnt">'+tx.length+'文字</div></div>').join('');
-}
-function cp(btn,text){
-  navigator.clipboard.writeText(text).catch(()=>{const t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t)});
-  btn.textContent='✅ コピー済';btn.classList.add('ok');
-  setTimeout(()=>{btn.textContent='コピー';btn.classList.remove('ok')},2000);
-}
+保存して後で見返してね✅'];}
+async function gen(tab){const out=document.getElementById('o-'+tab);out.style.display='block';out.innerHTML='<div style="text-align:center;padding:20px;color:#555">生成中...</div>';await new Promise(r=>setTimeout(r,800));const results=gl(tab);out.innerHTML=results.map((tx,i)=>'<div class="card"><div class="plabel">パターン'+(i+1)+'</div><button class="cp" onclick="cp(this,this.nextElementSibling.nextElementSibling.textContent)">コピー</button><div class="txt">'+tx+'</div><div class="cnt">'+tx.length+'文字</div></div>').join('');}
+function cp(btn,text){navigator.clipboard.writeText(text).catch(()=>{const t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t)});btn.textContent='✅ コピー済';btn.classList.add('ok');setTimeout(()=>{btn.textContent='コピー';btn.classList.remove('ok')},2000);}
 </script>
 </body>
-</html><!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Blog</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Arial, sans-serif; background: #f0f2f5; color: #333; }
-    header { background: #1a1a2e; color: white; padding: 24px 40px; }
-    header h1 { font-size: 30px; }
-    header p { font-size: 14px; color: #aaa; margin-top: 6px; }
-    .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
-    .card { background: white; border-radius: 14px; padding: 30px; margin-bottom: 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
-    .meta { font-size: 13px; color: #999; margin-bottom: 10px; }
-    .card h2 { font-size: 22px; margin-bottom: 12px; color: #1a1a2e; }
-    .card p { font-size: 15px; line-height: 1.8; color: #555; margin-bottom: 18px; }
-    .tweet-btn { display: inline-flex; align-items: center; gap: 8px; background: #000; color: white; border-radius: 20px; padding: 10px 22px; font-size: 14px; font-weight: bold; text-decoration: none; }
-    .tweet-btn:hover { background: #333; }
-    footer { text-align: center; padding: 30px; color: #aaa; font-size: 13px; }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>My Blog</h1>
-    <p>記事を書いて、X でシェアしよう</p>
-  </header>
-  <div class="container">
-    <div class="card">
-      <p class="meta">2026年6月13日</p>
-      <h2>Git をインストールしてみた</h2>
-      <p>今日は Git を Windows にインストールしました。Git Bash を使うことでコマンドラインからGitを操作できるようになりました。GitHubと連携すればバージョン管理も簡単にできそうです。</p>
-      <a class="tweet-btn" href="https://twitter.com/intent/tweet?text=Git+をインストールしてみた&url=https://ogatakun0-web.github.io/my-blog/" target="_blank" rel="noopener">X でシェア</a>
-    </div>
-    <div class="card">
-      <p class="meta">2026年6月13日</p>
-      <h2>GitHub でページを公開してみた</h2>
-      <p>GitHub Pagesを使って静的サイトを公開しました。HTMLファイルをリポジトリに置くだけでWebサイトとして公開できるので、とても手軽です。ブログとして活用していきたいと思います。</p>
-      <a class="tweet-btn" href="https://twitter.com/intent/tweet?text=GitHub+でページを公開してみた&url=https://ogatakun0-web.github.io/my-blog/" target="_blank" rel="noopener">X でシェア</a>
-    </div>
-  </div>
-  <footer><p>2026 My Blog - Powered by GitHub Pages</p></footer>
-</body>
-</html><!DOCTYPE html>
-  <html lang="ja">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Blog</title>
-    <style>
-      * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Arial, sans-serif; background: #f5f5f5; color: #333; }
-        header { background: #1a1a2e; color: white; padding: 20px 40px; }
-    header h1 { font-size: 28px; }
-    header p { font-size: 14px; color: #aaa; margin-top: 4px; }
-        .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
-    .card { background: white; border-radius: 12px; padding: 30px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-    .card h2 { font-size: 22px; margin-bottom: 10px; color: #1a1a2e; }
-    .card p { font-size: 15px; line-height: 1.7; color: #555; margin-bottom: 16px; }
-    .meta { font-size: 13px; color: #999; margin-bottom: 16px; }
-    .tweet-btn { display: inline-flex; align-items: center; gap: 8px; background: #000; color: white; border: none; border-radius: 20px; padding: 10px 20px; font-size: 14px; font-weight: bold; cursor: pointer; text-decoration: none; }
-    footer { text-align: center; padding: 30px; color: #aaa; font-size: 13px; }
-      </style>
-        </head>
-        <body>
-          <header>
-            <h1>My Blog</h1>
-          <p>記事を書いて、Xでシェアしよう</p>
-        </header>
-        <div class="container">
-          <div class="card">
-            <p class="meta">2026年6月13日</p>
-            <h2>Gitをインストールしてみた</h2>
-            <p>今日はGitをWindowsにインストールしました。Git Bashを使うことでコマンドラインからGitを操作できるようになりました。</p>
-      <a class="tweet-btn" href="https://twitter.com/intent/tweet?text=Gitをインストールしてみた&url=https://ogatakun0-web.github.io/my-blog/" target="_blank">𝕏 Xでシェア</a>
-          </div>
-          <div class="card">
-            <p class="meta">2026年6月13日</p>
-            <h2>GitHubでページを公開してみた</h2>
-            <p>GitHub Pagesを使って静的サイトを公開しました。HTMLファイルを置くだけでWebサイトとして公開できます。</p>
-            <a class="tweet-btn" href="https://twitter.com/intent/tweet?text=GitHubでページを公開してみた&url=https://ogatakun0-web.github.io/my-blog/" target="_blank">𝕏 Xでシェア</a>
-          </div>
-        </div>
-        <footer><p>&copy; 2026 My Blog - Powered by GitHub Pages</p></footer>
-      </body>
-      </html>
+</html>
