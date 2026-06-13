@@ -1,6 +1,293 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>X指示プロンプト コワーク最速</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#0f0f0f;color:#e8e8e8;min-height:100vh}
+header{background:linear-gradient(135deg,#1a1a2e,#16213e);padding:20px 24px;border-bottom:1px solid #333}
+header h1{font-size:20px;font-weight:700}
+header p{font-size:12px;color:#888;margin-top:4px}
+.tabs{display:flex;gap:4px;padding:16px 16px 0;border-bottom:1px solid #222}
+.tab{padding:10px 16px;border-radius:8px 8px 0 0;font-size:13px;font-weight:600;cursor:pointer;border:none;background:#1a1a1a;color:#888}
+.tab.on{background:#1d9bf0;color:#fff}
+.panel{display:none;padding:20px;max-width:680px;margin:0 auto}
+.panel.on{display:block}
+label{font-size:12px;color:#888;display:block;margin:16px 0 6px}
+label:first-child{margin-top:0}
+textarea{width:100%;background:#1a1a1a;border:1px solid #333;border-radius:10px;color:#e8e8e8;font-size:14px;padding:12px;min-height:80px;resize:vertical;font-family:inherit;outline:none}
+textarea:focus{border-color:#1d9bf0}
+.sec{font-size:11px;color:#555;margin:16px 0 6px;text-transform:uppercase;letter-spacing:1px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.chip{padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;border:1px solid #333;background:#1a1a1a;color:#aaa}
+.chip.on{background:#1d9bf0;color:#fff;border-color:#1d9bf0}
+.btn{width:100%;margin-top:20px;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,#1d9bf0,#0d7ec4);color:#fff;font-size:15px;font-weight:700;cursor:pointer}
+.out{margin-top:20px;display:none}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:16px;margin-bottom:12px;position:relative}
+.plabel{font-size:11px;color:#1d9bf0;font-weight:700;margin-bottom:8px;text-transform:uppercase}
+.txt{font-size:14px;line-height:1.7;white-space:pre-wrap;word-break:break-all}
+.cp{position:absolute;top:12px;right:12px;background:#222;border:1px solid #444;color:#aaa;padding:4px 10px;border-radius:6px;font-size:11px;cursor:pointer}
+.cp.ok{background:#22c55e;color:#fff;border-color:#22c55e}
+.cnt{font-size:11px;color:#555;text-align:right;margin-top:4px}
+.qts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.qt{background:#1a1a1a;border:1px solid #333;border-radius:8px;padding:10px 12px;font-size:12px;cursor:pointer;color:#aaa;text-align:left}
+.qt strong{display:block;color:#e8e8e8;font-size:12px;margin-bottom:2px}
+.qt:hover{border-color:#1d9bf0}
+</style>
+</head>
+<body>
+<header>
+<h1>X指示プロンプト - コワーク最速</h1>
+<p>タブ選ぶ → テーマ入力 → 3パターン生成 → コピーしてコワークへ</p>
+</header>
+<div class="tabs">
+<button class="tab on" onclick="sw('short')">🌅 短ツイート</button>
+<button class="tab" onclick="sw('article')">📝 記事ツイート</button>
+<button class="tab" onclick="sw('custom')">⚙️ カスタム</button>
+</div>
+<div class="panel on" id="p-short">
+<label>テーマをざっくり入力</label>
+<textarea id="s-theme" placeholder="例：修行3日目、朝5時起き習慣、副業で初収益など"></textarea>
+<div class="sec">時間帯</div>
+<div class="chips">
+<div class="chip on" data-g="time">🌄 朝</div>
+<div class="chip" data-g="time">☀️ 昼</div>
+<div class="chip" data-g="time">🌆 夕</div>
+<div class="chip" data-g="time">🌙 夜</div>
+</div>
+<div class="sec">トーン</div>
+<div class="chips">
+<div class="chip on" data-g="tone">🔥 熱血・本気</div>
+<div class="chip" data-g="tone">😌 穏やか・等身大</div>
+<div class="chip" data-g="tone">🧠 知識・学び系</div>
+<div class="chip" data-g="tone">💬 共感・悩み</div>
+<div class="chip" data-g="tone">😂 ユーモア</div>
+</div>
+<div class="sec">修行・挑戦日数（任意）</div>
+<div class="chips">
+<div class="chip" data-g="days">1日目</div>
+<div class="chip" data-g="days">3日目</div>
+<div class="chip" data-g="days">7日目</div>
+<div class="chip" data-g="days">14日目</div>
+<div class="chip" data-g="days">30日目</div>
+<div class="chip" data-g="days">100日目</div>
+</div>
+<button class="btn" onclick="gen('short')">🐻 3パターン生成</button>
+<div class="out" id="o-short"></div>
+</div>
+<div class="panel" id="p-article">
+<label>記事・伝えたい内容</label>
+<textarea id="a-theme" placeholder="例：副業フリーランス月5万達成の方法、筋トレ習慣のコツなど"></textarea>
+<div class="sec">フォーマット</div>
+<div class="chips">
+<div class="chip on" data-g="fmt">📋 リスト型</div>
+<div class="chip" data-g="fmt">📖 ストーリー型</div>
+<div class="chip" data-g="fmt">❓ 問いかけ型</div>
+<div class="chip" data-g="fmt">💡 気づき型</div>
+<div class="chip" data-g="fmt">📊 データ・実績型</div>
+</div>
+<div class="sec">ターゲット</div>
+<div class="chips">
+<div class="chip on" data-g="tgt">副業・フリーランス志望</div>
+<div class="chip" data-g="tgt">会社員・サラリーマン</div>
+<div class="chip" data-g="tgt">20代・自己投資層</div>
+<div class="chip" data-g="tgt">起業・独立志向</div>
+<div class="chip" data-g="tgt">主婦・在宅ワーク</div>
+</div>
+<button class="btn" onclick="gen('article')">🐻 3パターン生成</button>
+<div class="out" id="o-article"></div>
+</div>
+<div class="panel" id="p-custom">
+<div class="sec">クイックテンプレ</div>
+<div class="qts">
+<button class="qt" onclick="st('outreach')"><strong>📩 アウトリーチDM</strong>初回DM文面を最適化</button>
+<button class="qt" onclick="st('reply')"><strong>💬 リプ文面</strong>エンゲージ上がるリプ</button>
+<button class="qt" onclick="st('profile')"><strong>👤 プロフ改善</strong>フォローされるプロフ</button>
+<button class="qt" onclick="st('hook')"><strong>🎣 フック強化</strong>冒頭1行を最強に</button>
+</div>
+<label style="margin-top:20px">詳細・素材を入力</label>
+<textarea id="c-theme" placeholder="テンプレを選ぶか、自由に入力してください"></textarea>
+<button class="btn" onclick="gen('custom')">🐻 3パターン生成</button>
+<div class="out" id="o-custom"></div>
+</div>
+<script>
+function sw(t){
+  document.querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('on',['short','article','custom'][i]===t));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.getElementById('p-'+t).classList.add('on');
+}
+document.querySelectorAll('.chip').forEach(c=>{
+  c.addEventListener('click',function(){
+    const g=this.dataset.g,radio=['time','fmt','tgt'].includes(g);
+    if(radio)document.querySelectorAll('.chip[data-g="'+g+'"]').forEach(x=>x.classList.remove('on'));
+    this.classList.toggle('on');
+  });
+});
+function gs(g){return[...document.querySelectorAll('.chip[data-g="'+g+'"].on')].map(c=>c.textContent.trim())}
+function st(type){
+  const m={outreach:'アウトリーチDM：プロフィール（例：副業月5万達成のWebライター）を入力。初回DM文面3パターンを生成します。',reply:'リプ文面：リプしたい相手のツイート内容とあなたのポジションを入力してください。',profile:'プロフ改善：現在のプロフ文を貼り付けてください。フォローされやすいプロフに改善します。',hook:'フック強化：改善したいツイートの冒頭または本文を入力してください。冒頭1行を強力なフックに書き換えます。'};
+  document.getElementById('c-theme').value=m[type];
+}
+function gl(tab){
+  const theme=document.getElementById(tab==='short'?'s-theme':tab==='article'?'a-theme':'c-theme').value;
+  const time=gs('time')[0]||'朝',tone=gs('tone')[0]||'熱血',days=gs('days').join(''),fmt=gs('fmt')[0]||'リスト型',tgt=gs('tgt')[0]||'副業志望';
+  const t=theme||'今日の気づき';
+  if(tab==='short'){
+    const d=days?days+'の':'';
+    return[
+      (time.includes('朝')?'おはようございます☀️
+
+':'')+d+t+'
+
+正直に言う。
+これをやらずに結果を出そうとしてた自分が甘かった。
+
+今日から変える。見てろよ。
+
+#コワーク #修行中',
+      t+'
+
+気づいたこと↓
+
+・やる気より仕組みが大事
+・完璧より継続が勝る
+・比べる相手は昨日の自分
+
+'+d+'今日も一歩。
+
+#副業 #自己投資',
+      (time.includes('朝')?'【朝の宣言】':'【今日の学び】')+'
+
+'+t+'
+
+昨日より1%だけ成長する。
+それだけでいい。
+
+積み上げた人が最終的に勝つ。
+
+#'+(days||'挑戦中')
+    ];
+  }
+  if(tab==='article'){
+    if(fmt.includes('リスト')){
+      return[
+        '【'+t+'】
+
+知らないと損する3つのこと↓
+
+1. 最初は質より量
+2. SNS発信と並走させる
+3. 仲間を作ると加速する
+
+'+tgt+'の人は必見。
+保存して後で見返してください✅',
+        t+'で結果が出た人の共通点↓
+
+✅ 毎日アウトプットしてる
+✅ 失敗を記録して活かしてる
+✅ 諦める前に相談してる
+
+この3つだけ意識すれば変わる。
+
+いいねで記録しておいてください👍',
+        '正直に言う。
+'+t+'で失敗する人の特徴↓
+
+❌ インプットだけで満足
+❌ 結果が出る前にやめる
+❌ 一人で抱え込む
+
+逆をやるだけで変わる。
+'+tgt+'の人へ届け。
+RTで広めてもらえると嬉しいです🙏'
+      ];
+    }
+    return[
+      '【'+t+'の話】
+
+半年前の自分は全く稼げなかった。
+
+でも今は違う。
+
+変わったきっかけは「続けること」ではなく「仕組みを作ること」だった。
+
+'+tgt+'の人、この違いを理解するだけで結果が変わる。
+
+保存推奨✅',
+      t+'
+
+ある日気づいた。「努力の方向が違った」と。
+
+頑張ってるのに結果が出ない時は、
+やり方を変えるサイン。
+
+'+tgt+'の人へ。
+今すぐ立ち止まって考えてみて。
+
+いいねしてくれると励みになります👍',
+      t+'について正直に話す。
+
+最初は全然うまくいかなかった。
+でも諦めなかった理由がある。
+
+→ 小さな成功体験を積み重ねたから
+
+'+tgt+'の人、焦らなくていい。
+一歩ずつで絶対たどり着ける。
+
+RTで仲間に届けてください🙏'
+    ];
+  }
+  const ct=theme||'コンテンツ';
+  return[
+    '【パターン1 シンプル直球型】
+
+'+ct.substring(0,40)+'
+
+率直に言います。
+これを知ってるかどうかで差がつきます。
+
+詳しくはコメントで👇',
+    '【パターン2 共感型】
+
+'+ct.substring(0,40)+'
+
+同じことで悩んでる人へ届いてほしい。
+
+一人で抱え込まないで。
+
+いいねで応援してください👍',
+    '【パターン3 実績・証拠型】
+
+'+ct.substring(0,40)+'
+
+実際にやってみた結果↓
+
+→ 継続することで必ず変わる
+
+保存して後で見返してね✅'
+  ];
+}
+async function gen(tab){
+  const out=document.getElementById('o-'+tab);
+  out.style.display='block';
+  out.innerHTML='<div style="text-align:center;padding:20px;color:#555">生成中...</div>';
+  await new Promise(r=>setTimeout(r,800));
+  const results=gl(tab);
+  out.innerHTML=results.map((tx,i)=>'<div class="card"><div class="plabel">パターン'+(i+1)+'</div><button class="cp" onclick="cp(this,this.nextElementSibling.nextElementSibling.textContent)">コピー</button><div class="txt">'+tx+'</div><div class="cnt">'+tx.length+'文字</div></div>').join('');
+}
+function cp(btn,text){
+  navigator.clipboard.writeText(text).catch(()=>{const t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t)});
+  btn.textContent='✅ コピー済';btn.classList.add('ok');
+  setTimeout(()=>{btn.textContent='コピー';btn.classList.remove('ok')},2000);
+}
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="ja">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Blog</title>
