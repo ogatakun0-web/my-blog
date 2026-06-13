@@ -218,7 +218,7 @@ RTで仲間に届けてください🙏'];}const ct=theme||'コンテンツ';ret
 → 継続することで必ず変わる
 
 保存して後で見返してね✅'];}
-async function gen(tab){const out=document.getElementById('o-'+tab);out.style.display='block';out.innerHTML='<div style="text-align:center;padding:20px;color:#555">生成中...</div>';await new Promise(r=>setTimeout(r,800));const results=gl(tab);out.innerHTML=results.map((tx,i)=>'<div class="card"><div class="plabel">パターン'+(i+1)+'</div><button class="cp" onclick="cp(this,this.nextElementSibling.nextElementSibling.textContent)">コピー</button><div class="txt">'+tx+'</div><div class="cnt">'+tx.length+'文字</div></div>').join('');}
+async async function gen(tab){const out=document.getElementById('o-'+tab);out.style.display='block';out.innerHTML='<div style="text-align:center;padding:20px;color:#555">生成中...</div>';await new Promise(r=>setTimeout(r,800));const results=gl(tab);out.innerHTML=results.map((tx,i)=>'<div class="card"><div class="plabel">パターン'+(i+1)+'</div><button class="cp" onclick="cp(this,this.nextElementSibling.nextElementSibling.textContent)">コピー</button><div class="txt">'+tx+'</div><div class="cnt">'+tx.length+'文字</div></div>').join('');}
 function cp(btn,text){navigator.clipboard.writeText(text).catch(()=>{const t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t)});btn.textContent='✅ コピー済';btn.classList.add('ok');setTimeout(()=>{btn.textContent='コピー';btn.classList.remove('ok')},2000);}
 </script>
 </body>
