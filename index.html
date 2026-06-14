@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>X指示プロンプト コワーク最速</title>
+<title>Xæç¤ºãã­ã³ãã ã³ã¯ã¼ã¯æé</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Arial,sans-serif;background:#0f0f0f;color:#e8e8e8;min-height:100vh}
@@ -39,80 +39,275 @@ textarea:focus{border-color:#1d9bf0}
 </head>
 <body>
 <header>
-<h1>X指示プロンプト - コワーク最速</h1>
-<p>タブ選ぶ → テーマ入力 → 3パターン生成 → コピーしてコワークへ</p>
+<h1>Xæç¤ºãã­ã³ãã - ã³ã¯ã¼ã¯æé</h1>
+<p>ã¿ãé¸ã¶ â ãã¼ãå¥å â 3ãã¿ã¼ã³çæ â ã³ãã¼ãã¦ã³ã¯ã¼ã¯ã¸</p>
 </header>
 <div class="tabs">
-<button class="tab on" onclick="sw('short')">🌅 短ツイート</button>
-<button class="tab" onclick="sw('article')">📝 記事ツイート</button>
-<button class="tab" onclick="sw('custom')">⚙️ カスタム</button>
+<button class="tab on" onclick="sw('short')">ð ç­ãã¤ã¼ã</button>
+<button class="tab" onclick="sw('article')">ð è¨äºãã¤ã¼ã</button>
+<button class="tab" onclick="sw('custom')">âï¸ ã«ã¹ã¿ã </button>
 </div>
 <div class="panel on" id="p-short">
-<label>テーマをざっくり入力</label>
-<textarea id="s-theme" placeholder="例：修行3日目、朝5時起き習慣、副業で初収益など"></textarea>
-<div class="sec">時間帯</div>
+<label>ãã¼ãããã£ããå¥å</label>
+<textarea id="s-theme" placeholder="ä¾ï¼ä¿®è¡3æ¥ç®ãæ5æèµ·ãç¿æ£ãå¯æ¥­ã§ååçãªã©"></textarea>
+<div class="sec">æéå¸¯</div>
 <div class="chips">
-<div class="chip on" data-g="time">🌄 朝</div>
-<div class="chip" data-g="time">☀️ 昼</div>
-<div class="chip" data-g="time">🌆 夕</div>
-<div class="chip" data-g="time">🌙 夜</div>
+<div class="chip on" data-g="time">ð æ</div>
+<div class="chip" data-g="time">âï¸ æ¼</div>
+<div class="chip" data-g="time">ð å¤</div>
+<div class="chip" data-g="time">ð å¤</div>
 </div>
-<div class="sec">トーン</div>
+<div class="sec">ãã¼ã³</div>
 <div class="chips">
-<div class="chip on" data-g="tone">🔥 熱血・本気</div>
-<div class="chip" data-g="tone">😌 穏やか・等身大</div>
-<div class="chip" data-g="tone">🧠 知識・学び系</div>
-<div class="chip" data-g="tone">💬 共感・悩み</div>
-<div class="chip" data-g="tone">😂 ユーモア</div>
+<div class="chip on" data-g="tone">ð¥ ç±è¡ã»æ¬æ°</div>
+<div class="chip" data-g="tone">ð ç©ããã»ç­èº«å¤§</div>
+<div class="chip" data-g="tone">ð§  ç¥è­ã»å­¦ã³ç³»</div>
+<div class="chip" data-g="tone">ð¬ å±æã»æ©ã¿</div>
+<div class="chip" data-g="tone">ð ã¦ã¼ã¢ã¢</div>
 </div>
-<div class="sec">修行・挑戦日数（任意）</div>
-<input type="number" id="days-input" min="1" max="9999" placeholder="例：8" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid #333;background:#1a1a1a;color:#e8e8e8;font-size:14px;margin-top:6px;outline:none;box-sizing:border-box;" oninput="this.style.borderColor=this.value?'#1d9bf0':'#333'">
-<button class="btn" onclick="gen('short')">🐻 3パターン生成</button>
+<div class="sec">ä¿®è¡ã»ææ¦æ¥æ°ï¼ä»»æï¼</div>
+<input type="number" id="days-input" min="1" max="9999" placeholder="ä¾ï¼8" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid #333;background:#1a1a1a;color:#e8e8e8;font-size:14px;margin-top:6px;outline:none;box-sizing:border-box;" oninput="this.style.borderColor=this.value?'#1d9bf0':'#333'">
+<button class="btn" onclick="gen('short')">ð» 3ãã¿ã¼ã³çæ</button>
 <div class="out" id="o-short"></div>
 </div>
 <div class="panel" id="p-article">
-<label>記事・伝えたい内容</label>
-<textarea id="a-theme" placeholder="例：副業フリーランス月5万達成の方法、筋トレ習慣のコツなど"></textarea>
-<div class="sec">フォーマット</div>
+<label>è¨äºã»ä¼ãããåå®¹</label>
+<textarea id="a-theme" placeholder="ä¾ï¼å¯æ¥­ããªã¼ã©ã³ã¹æ5ä¸éæã®æ¹æ³ãç­ãã¬ç¿æ£ã®ã³ããªã©"></textarea>
+<div class="sec">ãã©ã¼ããã</div>
 <div class="chips">
-<div class="chip on" data-g="fmt">📋 リスト型</div>
-<div class="chip" data-g="fmt">📖 ストーリー型</div>
-<div class="chip" data-g="fmt">❓ 問いかけ型</div>
-<div class="chip" data-g="fmt">💡 気づき型</div>
-<div class="chip" data-g="fmt">📊 データ・実績型</div>
+<div class="chip on" data-g="fmt">ð ãªã¹ãå</div>
+<div class="chip" data-g="fmt">ð ã¹ãã¼ãªã¼å</div>
+<div class="chip" data-g="fmt">â åãããå</div>
+<div class="chip" data-g="fmt">ð¡ æ°ã¥ãå</div>
+<div class="chip" data-g="fmt">ð ãã¼ã¿ã»å®ç¸¾å</div>
 </div>
-<div class="sec">ターゲット</div>
+<div class="sec">ã¿ã¼ã²ãã</div>
 <div class="chips">
-<div class="chip on" data-g="tgt">副業・フリーランス志望</div>
-<div class="chip" data-g="tgt">会社員・サラリーマン</div>
-<div class="chip" data-g="tgt">20代・自己投資層</div>
-<div class="chip" data-g="tgt">起業・独立志向</div>
-<div class="chip" data-g="tgt">主婦・在宅ワーク</div>
+<div class="chip on" data-g="tgt">å¯æ¥­ã»ããªã¼ã©ã³ã¹å¿æ</div>
+<div class="chip" data-g="tgt">ä¼ç¤¾å¡ã»ãµã©ãªã¼ãã³</div>
+<div class="chip" data-g="tgt">20ä»£ã»èªå·±æè³å±¤</div>
+<div class="chip" data-g="tgt">èµ·æ¥­ã»ç¬ç«å¿å</div>
+<div class="chip" data-g="tgt">ä¸»å©¦ã»å¨å®ã¯ã¼ã¯</div>
 </div>
-<button class="btn" onclick="gen('article')">🐻 3パターン生成</button>
+<button class="btn" onclick="gen('article')">ð» 3ãã¿ã¼ã³çæ</button>
 <div class="out" id="o-article"></div>
 </div>
 <div class="panel" id="p-custom">
-<div class="sec">クイックテンプレ</div>
+<div class="sec">ã¯ã¤ãã¯ãã³ãã¬</div>
 <div class="qts">
-<button class="qt" onclick="st('outreach')"><strong>📩 アウトリーチDM</strong>初回DM文面を最適化</button>
-<button class="qt" onclick="st('reply')"><strong>💬 リプ文面</strong>エンゲージ上がるリプ</button>
-<button class="qt" onclick="st('profile')"><strong>👤 プロフ改善</strong>フォローされるプロフ</button>
-<button class="qt" onclick="st('hook')"><strong>🎣 フック強化</strong>冒頭1行を最強に</button>
+<button class="qt" onclick="st('outreach')"><strong>ð© ã¢ã¦ããªã¼ãDM</strong>ååDMæé¢ãæé©å</button>
+<button class="qt" onclick="st('reply')"><strong>ð¬ ãªãæé¢</strong>ã¨ã³ã²ã¼ã¸ä¸ãããªã</button>
+<button class="qt" onclick="st('profile')"><strong>ð¤ ãã­ãæ¹å</strong>ãã©ã­ã¼ããããã­ã</button>
+<button class="qt" onclick="st('hook')"><strong>ð£ ããã¯å¼·å</strong>åé ­1è¡ãæå¼·ã«</button>
 </div>
-<label style="margin-top:20px">詳細・素材を入力</label>
-<textarea id="c-theme" placeholder="テンプレを選ぶか、自由に入力してください"></textarea>
-<button class="btn" onclick="gen('custom')">🐻 3パターン生成</button>
+<label style="margin-top:20px">è©³ç´°ã»ç´ æãå¥å</label>
+<textarea id="c-theme" placeholder="ãã³ãã¬ãé¸ã¶ããèªç±ã«å¥åãã¦ãã ãã"></textarea>
+<button class="btn" onclick="gen('custom')">ð» 3ãã¿ã¼ã³çæ</button>
 <div class="out" id="o-custom"></div>
 </div>
 <script>
 function sw(t){document.querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('on',['short','article','custom'][i]===t));document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));document.getElementById('p-'+t).classList.add('on');}
 document.querySelectorAll('.chip').forEach(c=>{c.addEventListener('click',function(){const g=this.dataset.g,radio=['time','fmt','tgt'].includes(g);if(radio)document.querySelectorAll('.chip[data-g="'+g+'"]').forEach(x=>x.classList.remove('on'));this.classList.toggle('on');});});
 function gs(g){return[...document.querySelectorAll('.chip[data-g="'+g+'"].on')].map(c=>c.textContent.trim())}
-function st(type){const m={outreach:'アウトリーチDM：プロフィール（例：副業月5万達成のWebライター）を入力。初回DM文面3パターンを生成します。',reply:'リプ文面：リプしたい相手のツイート内容とあなたのポジションを入力してください。',profile:'プロフ改善：現在のプロフ文を貼り付けてください。フォローされやすいプロフに改善します。',hook:'フック強化：改善したいツイートの冒頭または本文を入力してください。冒頭1行を強力なフックに書き換えます。'};document.getElementById('c-theme').value=m[type];}
-function gl(tab){const theme=document.getElementById(tab==='short'?'s-theme':tab==='article'?'a-theme':'c-theme').value;const time=gs('time')[0]||'朝',tone=gs('tone')[0]||'熱血',days=document.getElementById('days-input').value,fmt=gs('fmt')[0]||'リスト型',tgt=gs('tgt')[0]||'副業志望';const t=theme||'今日の気づき';if(tab==='short'){const d=days?days+'の':'';return[(time.includes('朝')?'おはようございます☀️\n\n':'')+d+t+'\n\n正直に言う。\nこれをやらずに結果を出そうとしてた自分が甘かった。\n\n今日から変える。見てろよ。\n\n#コワーク #修行中',t+'\n\n気づいたこと↓\n\n・やる気より仕組みが大事\n・完璧より継続が勝る\n・比べる相手は昨日の自分\n\n'+d+'今日も一歩。\n\n#副業 #自己投資',(time.includes('朝')?'【朝の宣言】':'【今日の学び】')+'\n\n'+t+'\n\n昨日より1%だけ成長する。\nそれだけでいい。\n\n積み上げた人が最終的に勝つ。\n\n#'+(days||'挑戦中')];}if(tab==='article'){if(fmt.includes('リスト')){return['【'+t+'】\n\n知らないと損する3つのこと↓\n\n1. 最初は質より量\n2. SNS発信と並走させる\n3. 仲間を作ると加速する\n\n'+tgt+'の人は必見。\n保存して後で見返してください✅',t+'で結果が出た人の共通点↓\n\n✅ 毎日アウトプットしてる\n✅ 失敗を記録して活かしてる\n✅ 諦める前に相談してる\n\nこの3つだけ意識すれば変わる。\n\nいいねで記録しておいてください👍','正直に言う。\n'+t+'で失敗する人の特徴↓\n\n❌ インプットだけで満足\n❌ 結果が出る前にやめる\n❌ 一人で抱え込む\n\n逆をやるだけで変わる。\n'+tgt+'の人へ届け。\nRTで広めてもらえると嬉しいです🙏'];}return['【'+t+'の話】\n\n半年前の自分は全く稼げなかった。\n\nでも今は違う。\n\n変わったきっかけは「続けること」ではなく「仕組みを作ること」だった。\n\n'+tgt+'の人、この違いを理解するだけで結果が変わる。\n\n保存推奨✅',t+'\n\nある日気づいた。「努力の方向が違った」と。\n\n頑張ってるのに結果が出ない時は、\nやり方を変えるサイン。\n\n'+tgt+'の人へ。\n今すぐ立ち止まって考えてみて。\n\nいいねしてくれると励みになります👍',t+'について正直に話す。\n\n最初は全然うまくいかなかった。\nでも諦めなかった理由がある。\n\n→ 小さな成功体験を積み重ねたから\n\n'+tgt+'の人、焦らなくていい。\n一歩ずつで絶対たどり着ける。\n\nRTで仲間に届けてください🙏'];}const ct=theme||'コンテンツ';return['【パターン1 シンプル直球型】\n\n'+ct.substring(0,40)+'\n\n率直に言います。\nこれを知ってるかどうかで差がつきます。\n\n詳しくはコメントで👇','【パターン2 共感型】\n\n'+ct.substring(0,40)+'\n\n同じことで悩んでる人へ届いてほしい。\n\n一人で抱え込まないで。\n\nいいねで応援してください👍','【パターン3 実績・証拠型】\n\n'+ct.substring(0,40)+'\n\n実際にやってみた結果↓\n\n→ 継続することで必ず変わる\n\n保存して後で見返してね✅'];}
-async function gen(tab){const out=document.getElementById('o-'+tab);out.style.display='block';out.innerHTML='<div style="text-align:center;padding:20px;color:#555">生成中...</div>';await new Promise(r=>setTimeout(r,800));const results=gl(tab);out.innerHTML=results.map((tx,i)=>'<div class="card"><div class="plabel">パターン'+(i+1)+'</div><button class="cp" onclick="cp(this,this.nextElementSibling.nextElementSibling.textContent)">コピー</button><div class="txt">'+tx+'</div><div class="cnt">'+tx.length+'文字</div></div>').join('');}
-function cp(btn,text){navigator.clipboard.writeText(text).catch(()=>{const t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t)});btn.textContent='✅ コピー済';btn.classList.add('ok');setTimeout(()=>{btn.textContent='コピー';btn.classList.remove('ok')},2000);}
+function st(type){const m={outreach:'ã¢ã¦ããªã¼ãDMï¼ãã­ãã£ã¼ã«ï¼ä¾ï¼å¯æ¥­æ5ä¸éæã®Webã©ã¤ã¿ã¼ï¼ãå¥åãååDMæé¢3ãã¿ã¼ã³ãçæãã¾ãã',reply:'ãªãæé¢ï¼ãªããããç¸æã®ãã¤ã¼ãåå®¹ã¨ããªãã®ãã¸ã·ã§ã³ãå¥åãã¦ãã ããã',profile:'ãã­ãæ¹åï¼ç¾å¨ã®ãã­ãæãè²¼ãä»ãã¦ãã ããããã©ã­ã¼ããããããã­ãã«æ¹åãã¾ãã',hook:'ããã¯å¼·åï¼æ¹åããããã¤ã¼ãã®åé ­ã¾ãã¯æ¬æãå¥åãã¦ãã ãããåé ­1è¡ãå¼·åãªããã¯ã«æ¸ãæãã¾ãã'};document.getElementById('c-theme').value=m[type];}
+function gl(tab){const theme=document.getElementById(tab==='short'?'s-theme':tab==='article'?'a-theme':'c-theme').value;const time=gs('time')[0]||'æ',tone=gs('tone')[0]||'ç±è¡',days=document.getElementById('days-input').value,fmt=gs('fmt')[0]||'ãªã¹ãå',tgt=gs('tgt')[0]||'å¯æ¥­å¿æ';const t=theme||'ä»æ¥ã®æ°ã¥ã';if(tab==='short'){const d=days?days+'ã®':'';return[(time.includes('æ')?'ãã¯ãããããã¾ãâï¸\n\n':'')+d+t+'\n\næ­£ç´ã«è¨ãã\nããããããã«çµæãåºããã¨ãã¦ãèªåãçãã£ãã\n\nä»æ¥ããå¤ãããè¦ã¦ããã\n\n#ã³ã¯ã¼ã¯ #ä¿®è¡ä¸­',t+'\n\næ°ã¥ãããã¨â\n\nã»ããæ°ããä»çµã¿ãå¤§äº\nã»å®ç§ããç¶ç¶ãåã\nã»æ¯ã¹ãç¸æã¯æ¨æ¥ã®èªå\n\n'+d+'ä»æ¥ãä¸æ­©ã\n\n#å¯æ¥­ #èªå·±æè³',(time.includes('æ')?'ãæã®å®£è¨ã':'ãä»æ¥ã®å­¦ã³ã')+'\n\n'+t+'\n\næ¨æ¥ãã1%ã ãæé·ããã\nããã ãã§ããã\n\nç©ã¿ä¸ããäººãæçµçã«åã¤ã\n\n#'+(days||'ææ¦ä¸­')];}if(tab==='article'){if(fmt.includes('ãªã¹ã')){return['ã'+t+'ã\n\nç¥ããªãã¨æãã3ã¤ã®ãã¨â\n\n1. æåã¯è³ªããé\n2. SNSçºä¿¡ã¨ä¸¦èµ°ããã\n3. ä»²éãä½ãã¨å éãã\n\n'+tgt+'ã®äººã¯å¿è¦ã\nä¿å­ãã¦å¾ã§è¦è¿ãã¦ãã ããâ',t+'ã§çµæãåºãäººã®å±éç¹â\n\nâ æ¯æ¥ã¢ã¦ãããããã¦ã\nâ å¤±æãè¨é²ãã¦æ´»ããã¦ã\nâ è«¦ããåã«ç¸è«ãã¦ã\n\nãã®3ã¤ã ãæè­ããã°å¤ããã\n\nããã­ã§è¨é²ãã¦ããã¦ãã ããð','æ­£ç´ã«è¨ãã\n'+t+'ã§å¤±æããäººã®ç¹å¾´â\n\nâ ã¤ã³ãããã ãã§æºè¶³\nâ çµæãåºãåã«ããã\nâ ä¸äººã§æ±ãè¾¼ã\n\néãããã ãã§å¤ããã\n'+tgt+'ã®äººã¸å±ãã\nRTã§åºãã¦ããããã¨å¬ããã§ãð'];}return['ã'+t+'ã®è©±ã\n\nåå¹´åã®èªåã¯å¨ãç¨¼ããªãã£ãã\n\nã§ãä»ã¯éãã\n\nå¤ãã£ããã£ããã¯ãç¶ãããã¨ãã§ã¯ãªããä»çµã¿ãä½ããã¨ãã ã£ãã\n\n'+tgt+'ã®äººããã®éããçè§£ããã ãã§çµæãå¤ããã\n\nä¿å­æ¨å¥¨â',t+'\n\nããæ¥æ°ã¥ããããåªåã®æ¹åãéã£ããã¨ã\n\né å¼µã£ã¦ãã®ã«çµæãåºãªãæã¯ã\nããæ¹ãå¤ãããµã¤ã³ã\n\n'+tgt+'ã®äººã¸ã\nä»ããç«ã¡æ­¢ã¾ã£ã¦èãã¦ã¿ã¦ã\n\nããã­ãã¦ãããã¨å±ã¿ã«ãªãã¾ãð',t+'ã«ã¤ãã¦æ­£ç´ã«è©±ãã\n\næåã¯å¨ç¶ãã¾ããããªãã£ãã\nã§ãè«¦ããªãã£ãçç±ãããã\n\nâ å°ããªæåä½é¨ãç©ã¿éã­ããã\n\n'+tgt+'ã®äººãç¦ããªãã¦ããã\nä¸æ­©ãã¤ã§çµ¶å¯¾ãã©ãçããã\n\nRTã§ä»²éã«å±ãã¦ãã ããð'];}const ct=theme||'ã³ã³ãã³ã';return['ããã¿ã¼ã³1 ã·ã³ãã«ç´çåã\n\n'+ct.substring(0,40)+'\n\nçç´ã«è¨ãã¾ãã\nãããç¥ã£ã¦ããã©ããã§å·®ãã¤ãã¾ãã\n\nè©³ããã¯ã³ã¡ã³ãã§ð','ããã¿ã¼ã³2 å±æåã\n\n'+ct.substring(0,40)+'\n\nåããã¨ã§æ©ãã§ãäººã¸å±ãã¦ã»ããã\n\nä¸äººã§æ±ãè¾¼ã¾ãªãã§ã\n\nããã­ã§å¿æ´ãã¦ãã ããð','ããã¿ã¼ã³3 å®ç¸¾ã»è¨¼æ åã\n\n'+ct.substring(0,40)+'\n\nå®éã«ãã£ã¦ã¿ãçµæâ\n\nâ ç¶ç¶ãããã¨ã§å¿ãå¤ãã\n\nä¿å­ãã¦å¾ã§è¦è¿ãã¦ã­â'];}
+async function gen(tab){const out=document.getElementById('o-'+tab);out.style.display='block';out.innerHTML='<div style="text-align:center;padding:20px;color:#555">çæä¸­...</div>';await new Promise(r=>setTimeout(r,800));const results=gl(tab);out.innerHTML=results.map((tx,i)=>'<div class="card"><div class="plabel">ãã¿ã¼ã³'+(i+1)+'</div><button class="cp" onclick="cp(this,this.nextElementSibling.nextElementSibling.textContent)">ã³ãã¼</button><div class="txt">'+tx+'</div><div class="cnt">'+tx.length+'æå­</div></div>').join('');}
+function cp(btn,text){navigator.clipboard.writeText(text).catch(()=>{const t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t)});btn.textContent='â ã³ãã¼æ¸';btn.classList.add('ok');setTimeout(()=>{btn.textContent='ã³ãã¼';btn.classList.remove('ok')},2000);}
+</script>
+
+<script id="xprompt-custom">
+/* ===== X指示プロンプト カスタム機能 ===== */
+(function(){
+
+/* ----- スタイル ----- */
+const _s=document.createElement('style');
+_s.textContent=`
+.regen-btn{position:absolute;top:12px;right:72px;background:#1a1a2e;color:#7c9ef5;border:1px solid #3a5aad;border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;transition:background .15s,color .15s;white-space:nowrap;z-index:10}
+.regen-btn:hover{background:#2a3a6e;color:#aac4ff}
+.regen-btn:disabled{opacity:.5;cursor:not-allowed}
+.regen-btn.loading{animation:regen-pulse .8s infinite alternate}
+@keyframes regen-pulse{from{opacity:.5}to{opacity:1}}
+.fav-btn{position:absolute;top:11px;right:153px;background:transparent;border:1px solid #444;border-radius:6px;font-size:14px;cursor:pointer;padding:3px 8px;transition:transform .15s,color .15s;color:#666;line-height:1;z-index:10}
+.fav-btn:hover{transform:scale(1.3)}
+.fav-btn.saved{color:#f5c518}
+#fav-section{margin:24px auto;max-width:680px;padding:0 16px 40px}
+#fav-section h3{color:#aaa;font-size:13px;letter-spacing:.05em;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+#fav-section h3 .fav-count{background:#333;border-radius:10px;padding:1px 8px;font-size:11px;color:#888}
+.fav-card{background:#1a1a1a;border:1px solid #333;border-radius:10px;padding:14px 16px;margin-bottom:10px;position:relative}
+.fav-card-text{color:#ddd;font-size:13px;line-height:1.7;white-space:pre-wrap;margin-bottom:8px}
+.fav-card-meta{font-size:11px;color:#666;display:flex;align-items:center;gap:8px}
+.fav-card-actions{display:flex;gap:8px;margin-top:8px}
+.fav-copy-btn{background:#222;color:#aaa;border:1px solid #444;border-radius:6px;padding:3px 10px;font-size:11px;cursor:pointer}
+.fav-copy-btn:hover{background:#333}
+.fav-del-btn{background:transparent;color:#555;border:1px solid #333;border-radius:6px;padding:3px 10px;font-size:11px;cursor:pointer}
+.fav-del-btn:hover{color:#e55;border-color:#e55}
+#fav-empty{color:#555;font-size:12px;text-align:center;padding:20px 0}
+.fav-clear-btn{background:transparent;border:1px solid #333;color:#666;border-radius:6px;padding:2px 10px;font-size:11px;cursor:pointer;margin-left:auto}
+.fav-clear-btn:hover{color:#e55;border-color:#e55}
+`;
+document.head.appendChild(_s);
+
+/* ----- ① 設定記憶 ----- */
+const SK='xprompt_settings';
+function saveSettings(){
+  try{
+    const t=document.querySelector('button.tab.on');
+    const tab=t?(t.getAttribute('onclick').match(/sw\('(\w+)'\)/)||[])[1]:'short';
+    const ps=document.getElementById('p-short');
+    const pa=document.getElementById('p-article');
+    const cg=ps?ps.querySelectorAll('.chips'):[];
+    const ag=pa?pa.querySelectorAll('.chips'):[];
+    const s={
+      activeTab:tab,
+      short:{
+        theme:(document.getElementById('s-theme')||{}).value||'',
+        days:(document.getElementById('days-input')||{}).value||'',
+        time:cg[0]&&cg[0].querySelector('.chip.on')?cg[0].querySelector('.chip.on').textContent.trim():'',
+        tone:cg[1]&&cg[1].querySelector('.chip.on')?cg[1].querySelector('.chip.on').textContent.trim():''
+      },
+      article:{
+        theme:(document.getElementById('a-theme')||{}).value||'',
+        format:ag[0]&&ag[0].querySelector('.chip.on')?ag[0].querySelector('.chip.on').textContent.trim():'',
+        target:ag[1]&&ag[1].querySelector('.chip.on')?ag[1].querySelector('.chip.on').textContent.trim():''
+      },
+      custom:{theme:(document.getElementById('c-theme')||{}).value||''}
+    };
+    localStorage.setItem(SK,JSON.stringify(s));
+  }catch(e){}
+}
+function restoreSettings(){
+  try{
+    const raw=localStorage.getItem(SK);
+    if(!raw)return;
+    const s=JSON.parse(raw);
+    if(s.activeTab){const b=document.querySelector('button.tab[onclick="sw(\''+s.activeTab+'\')"]');if(b)b.click();}
+    setTimeout(()=>{
+      if(s.short){
+        const st=document.getElementById('s-theme');if(st&&s.short.theme)st.value=s.short.theme;
+        const di=document.getElementById('days-input');if(di&&s.short.days)di.value=s.short.days;
+        const ps=document.getElementById('p-short');
+        if(ps&&s.short.time){const cg=ps.querySelectorAll('.chips');if(cg[0])cg[0].querySelectorAll('.chip').forEach(c=>{if(c.textContent.trim()===s.short.time)c.click();});}
+        if(ps&&s.short.tone){const cg=ps.querySelectorAll('.chips');if(cg[1])cg[1].querySelectorAll('.chip').forEach(c=>{if(c.textContent.trim()===s.short.tone)c.click();});}
+      }
+      if(s.article){
+        const at=document.getElementById('a-theme');if(at&&s.article.theme)at.value=s.article.theme;
+        const pa=document.getElementById('p-article');
+        if(pa&&s.article.format){const ag=pa.querySelectorAll('.chips');if(ag[0])ag[0].querySelectorAll('.chip').forEach(c=>{if(c.textContent.trim()===s.article.format)c.click();});}
+        if(pa&&s.article.target){const ag=pa.querySelectorAll('.chips');if(ag[1])ag[1].querySelectorAll('.chip').forEach(c=>{if(c.textContent.trim()===s.article.target)c.click();});}
+      }
+      if(s.custom){const ct=document.getElementById('c-theme');if(ct&&s.custom.theme)ct.value=s.custom.theme;}
+    },100);
+  }catch(e){}
+}
+document.addEventListener('click',e=>{if(e.target.classList.contains('chip')||e.target.classList.contains('tab'))setTimeout(saveSettings,50);});
+document.addEventListener('input',e=>{if(e.target.tagName==='TEXTAREA'||e.target.tagName==='INPUT')setTimeout(saveSettings,200);});
+restoreSettings();
+
+/* ----- ② お気に入り保存 ----- */
+const FK='xprompt_favorites';
+function getFavs(){try{return JSON.parse(localStorage.getItem(FK))||[];}catch(e){return[];}}
+function saveFavs(f){localStorage.setItem(FK,JSON.stringify(f));}
+function addFav(text){
+  const f=getFavs();
+  if(f.find(x=>x.text===text))return false;
+  const now=new Date();
+  f.unshift({text,date:(now.getMonth()+1)+'/'+now.getDate()+' '+now.getHours()+':'+String(now.getMinutes()).padStart(2,'0'),id:Date.now()});
+  saveFavs(f);return true;
+}
+function removeFav(id){saveFavs(getFavs().filter(f=>f.id!==id));}
+function renderFavSection(){
+  const sec=document.getElementById('fav-section');if(!sec)return;
+  const f=getFavs();
+  const cnt=sec.querySelector('.fav-count');if(cnt)cnt.textContent=f.length;
+  const list=document.getElementById('fav-list');if(!list)return;
+  if(f.length===0){list.innerHTML='<div id="fav-empty">⭐ まだ保存がありません</div>';return;}
+  list.innerHTML=f.map(x=>`<div class="fav-card" data-id="${x.id}"><div class="fav-card-text">${x.text.replace(/</g,'&lt;')}</div><div class="fav-card-meta"><span>📅 ${x.date}</span><span>${x.text.replace(/\s/g,'').length}文字</span></div><div class="fav-card-actions"><button class="fav-copy-btn" data-text="${x.text.replace(/"/g,'&quot;')}">📋 コピー</button><button class="fav-del-btn" data-id="${x.id}">🗑 削除</button></div></div>`).join('');
+  list.querySelectorAll('.fav-copy-btn').forEach(b=>{b.onclick=function(){navigator.clipboard.writeText(this.dataset.text).then(()=>{const o=this.textContent;this.textContent='✅ コピー済み';setTimeout(()=>{this.textContent=o;},1500);});};});
+  list.querySelectorAll('.fav-del-btn').forEach(b=>{b.onclick=function(){removeFav(parseInt(this.dataset.id));updateFavBtns();renderFavSection();};});
+}
+function createFavSection(){
+  if(document.getElementById('fav-section'))return;
+  const sec=document.createElement('div');sec.id='fav-section';
+  sec.innerHTML='<h3>⭐ お気に入り <span class="fav-count">0</span><button class="fav-clear-btn" id="fav-clear-btn">全削除</button></h3><div id="fav-list"></div>';
+  document.body.appendChild(sec);
+  document.getElementById('fav-clear-btn').onclick=()=>{if(confirm('お気に入りをすべて削除しますか？')){saveFavs([]);updateFavBtns();renderFavSection();}};
+  renderFavSection();
+}
+function updateFavBtns(){
+  const ft=new Set(getFavs().map(f=>f.text));
+  document.querySelectorAll('.fav-btn').forEach(b=>{
+    const t=b.closest('.card')&&b.closest('.card').querySelector('.txt');
+    if(t){const ok=ft.has(t.textContent);b.classList.toggle('saved',ok);b.textContent=ok?'★':'☆';}
+  });
+}
+function addFavToCard(card){
+  if(card.querySelector('.fav-btn'))return;
+  const txt=card.querySelector('.txt');if(!txt)return;
+  const ok=getFavs().some(f=>f.text===txt.textContent);
+  const b=document.createElement('button');
+  b.className='fav-btn'+(ok?' saved':'');b.textContent=ok?'★':'☆';
+  b.onclick=e=>{
+    e.stopPropagation();
+    const t=card.querySelector('.txt');if(!t)return;
+    const text=t.textContent;const f=getFavs();const ex=f.find(x=>x.text===text);
+    if(ex){removeFav(ex.id);b.classList.remove('saved');b.textContent='☆';}
+    else{addFav(text);b.classList.add('saved');b.textContent='★';b.style.transform='scale(1.5)';setTimeout(()=>{b.style.transform='';},300);}
+    renderFavSection();
+  };
+  card.appendChild(b);
+}
+
+/* ----- ③ 再生成ボタン ----- */
+function getCurrentGenType(){const t=document.querySelector('button.tab.on');return t?(t.getAttribute('onclick').match(/sw\('(\w+)'\)/)||['','short'])[1]:'short';}
+function waitStable(el,ms){
+  return new Promise(res=>{
+    let last='',n=0;
+    const t=setInterval(()=>{const c=el.textContent;if(c===last){if(++n>=3){clearInterval(t);clearTimeout(to);res();}}else{n=0;last=c;}},400);
+    const to=setTimeout(()=>{clearInterval(t);res();},ms||20000);
+  });
+}
+async function regenOne(idx,btn){
+  const gt=getCurrentGenType();const out=document.querySelector('#o-'+gt);if(!out)return;
+  const cards=Array.from(out.querySelectorAll('.card'));
+  const saved=cards.map(c=>{const t=c.querySelector('.txt');return t?t.textContent:'';});
+  const savedCnt=cards.map(c=>{const t=c.querySelector('.cnt');return t?t.textContent:'';});
+  btn.disabled=true;btn.classList.add('loading');btn.textContent='⏳ 生成中…';
+  window.gen(gt);
+  await waitStable(out,20000);
+  const nc=Array.from(out.querySelectorAll('.card'));
+  if(nc.length<3){addCustomButtons();return;}
+  nc.forEach((c,i)=>{
+    if(i!==idx&&saved[i]){
+      const te=c.querySelector('.txt');const ce=c.querySelector('.cnt');
+      if(te)te.textContent=saved[i];
+      if(ce)ce.textContent=savedCnt[i];
+    }
+  });
+  addCustomButtons();
+}
+function addRegenToCard(card){
+  if(card.querySelector('.regen-btn'))return;
+  const cp=card.querySelector('.cp');if(!cp)return;
+  const out=card.closest('.out');
+  const idx=out?Array.from(out.querySelectorAll('.card')).indexOf(card):0;
+  const b=document.createElement('button');b.className='regen-btn';b.textContent='🔄 再生成';
+  b.onclick=e=>{e.stopPropagation();regenOne(idx,b);};
+  cp.after(b);
+}
+
+/* ----- 統合初期化 ----- */
+function addCustomButtons(){
+  document.querySelectorAll('.card').forEach(c=>{addRegenToCard(c);addFavToCard(c);});
+  updateFavBtns();
+  renderFavSection();
+}
+addCustomButtons();
+createFavSection();
+document.querySelectorAll('.out').forEach(o=>{
+  new MutationObserver(()=>setTimeout(addCustomButtons,300)).observe(o,{childList:true});
+});
+
+})();
 </script>
 </body>
 </html>
